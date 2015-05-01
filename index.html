@@ -7,14 +7,28 @@
         <title>Pokemon</title>
     </head>
     <body>
-    	<div class='row text-center'>
-        	<div class='btn btn-success generate'>Generate random pokemon</div>
-        </div>
-        <div id='image-container' class='row text-center'>
-        	<h2>Images</h2>
-        </div>
         <div class='row text-center'>
-        	<h2>Description</h2>
+            <div class='col-md-4'>
+                <ul class="list-group side-list">
+                </ul>
+            </div>
+
+            <div class='col-md-4'>
+                <div class="input-group">
+                    <input type="text" class="form-control search-field" placeholder='Search for a pokemon'>
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary search disabled" type="button">Search</button>
+                    </span>
+                </div>
+
+                <!-- Profile -->
+                <dl class="dl-horizontal">
+                </dl>
+            </div>
+            <div class='col-md-4'>
+                <div class='btn btn-primary generate'>Generate random pokemon images</div>
+                <div id='image-container'></div>
+            </div>
         </div>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
