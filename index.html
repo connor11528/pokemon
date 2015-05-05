@@ -5,8 +5,34 @@
        
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
         <title>Pokemon</title>
+
+        <style>
+            .play-now {
+                color: blue;
+                cursor: pointer;
+            }
+        </style>
     </head>
     <body>
+        <div class='row'>
+            <div class='col-md-offset-1 col-md-5'>
+                <h1>Soundcloud</h1>
+                <form id='soundcloud-search-form'>
+                    <input id='soundcloud-search-term' type="text" class="form-control" placeholder='Search for a sound on soundcloud'>
+                    <button class="btn btn-primary" type="submit">Search soundcloud</button>
+                </form>  
+
+                <div id='soundcloud-player'>
+                </div>              
+            </div>
+            <div class='col-md-6'>
+                <ul id='soundcloud-search-results'>
+
+                </ul>
+                <!-- soundcloud widget -->
+
+            </div>
+        </div>
         <div class='row text-center'>
             <div class='col-md-4'>
                 <ul class="list-group side-list">
@@ -17,7 +43,7 @@
                 <div class="input-group">
                     <input type="text" class="form-control search-field" placeholder='Search for a pokemon'>
                     <span class="input-group-btn">
-                        <button class="btn btn-primary search disabled" type="button">Search</button>
+                        <button class="btn btn-primary search disabled" type="button">Search pokemon</button>
                     </span>
                 </div>
 
@@ -30,6 +56,7 @@
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.0.1/spin.js"></script>
+        <script src="http://connect.soundcloud.com/sdk.js"></script>
 
         <script src='main.js'></script>
     </body>

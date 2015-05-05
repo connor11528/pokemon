@@ -1,0 +1,12 @@
+
+Implement the Soundcloud API into our Pokemon app so that people can listen
+to music while they're playing! Navigate to the JavaScript SDK docs (https://developers.soundcloud.
+com/docs/api/sdks).
+
+We should have a text box that allows the users to search for tracks that they want to play.
+
+Display information about the music currently playing.
+
+Bonus: Convert the Pokemon website to a Django project! Then, instead of using the JavaScript implementation of the Soundcloud API, we can use the server side implementation.
+
+Double Bonus: Look at the Spotify API and implement the ability to search for songs via voice control! (the docs are found here: https://developer.spotify.com/web-api/)

@@ -26,7 +26,6 @@ $(document).ready(function(){
 	$.ajax({
 		url: POKEMON_BASE + "api/v1/pokedex/1/",
 		success: function(allPokemon){
-			console.log(allPokemon.pokemon);
 			var pokeList = '';
 			allPokemon.pokemon.forEach(function(pokemon, i){
 				pokeList += '<li class="list-group-item" id="' + pokemon.resource_uri + '">' + pokemon.name + '</li>'
@@ -50,7 +49,6 @@ $(document).ready(function(){
 							success: function(imageData){
 								$('.list-group-item').css('background-color', 'white');
 								$('#' + pokemon.resource_uri).css('background-color', 'steelblue');
-								console.log(pokemon.resource_uri);
 								$('.profile-image').attr('src', POKEMON_BASE + imageData.image);
 							}
 						});
@@ -101,6 +99,48 @@ $(document).ready(function(){
 			}
 		});
 
+	});
+
+
+	// Soundcloud
+	SC.initialize({
+	  client_id: '8e6f3d6daf336340eeb65e5d54d78545'
+	});
+	var play_track = function(permalink_url, auto_play){
+		if(auto_play === 'undefined'){
+			auto_play = false;
+		}
+		$('#soundcloud-player').empty();
+		SC.oEmbed(permalink_url, { auto_play: auto_play }, function(oEmbed) {
+		  $('#soundcloud-player').append(oEmbed.html);
+		});
+	};
+	play_track('http://soundcloud.com/forss/flickermood', false);
+
+	// soundcloud search
+	$('#soundcloud-search-form').on('submit', function(e){
+		e.preventDefault();
+		var soundcloud_search_term = $('#soundcloud-search-term').val();
+		$('#soundcloud-search-results').empty();
+		
+		var search_results = '';
+		SC.get('/tracks', { q: soundcloud_search_term, license: 'cc-by-sa' }, function(tracks){
+		  
+		  tracks.forEach(function(track){
+		  	// display results
+		  	search_results += '<li>' + track.user.username + ' - ' + 
+		  		track.title + ' <span class="play-now" id="' + 
+		  		track.permalink_url + '">Play now!</span></li>';	  	
+		  });
+
+		  $('#soundcloud-search-results').append(search_results);
+		});
+	});
+
+	$('#soundcloud-search-results').on('click', '.play-now', function(e){
+		play_track($(this).attr('id'), true);
 	})
+	
+	
 });
 
