@@ -2,6 +2,7 @@ $(document).ready(function(){
 
 	var POKEMON_BASE = "http://pokeapi.co/";
 
+	// get random index of pokeman
 	var generatePokemonIds = function(num){
 		var randomPokemonIds = [];
 		for(var i = 0; i < num; i++){
@@ -10,33 +11,7 @@ $(document).ready(function(){
 		return randomPokemonIds;
 	};
 
-	var getPokemonImages = function(num, callback){
-		var randomPokemonIds = generatePokemonIds(num);
-
-		randomPokemonIds.forEach(function(pokemonId, i){
-			var reqUrl = POKEMON_BASE + "api/v1/sprite/" + pokemonId;
-
-			$.ajax({
-				url: reqUrl,
-				type: "GET",
-				dataType: 'jsonp',
-				success: callback
-			});
-		});
-
-	};
-
-	$('.generate').on('click', function(e){
-		$('#image-container').empty();
-
-		getPokemonImages(5, function(imageData){
-			var $img = $('<img id="' + imageData.id +'">');
-
-			$img.attr('src', POKEMON_BASE + imageData.image).appendTo('#image-container');
-		});
-		
-	});
-
+	// display pokemon's profile data
 	var displayPokemon = function(profileData){
 		$('dl').empty();
 		var profileInfo = '';
@@ -63,7 +38,22 @@ $(document).ready(function(){
 			$search.on('click', function(){
 				var searchTerm = $('.search-field').val().toLowerCase();
 				allPokemon.pokemon.forEach(function(pokemon, i){
+					// display matching pokemon
 					if (pokemon.name === searchTerm){
+						var reqUrl = POKEMON_BASE + "api/v1/sprite/" + getIdFromURI(pokemon.resource_uri);
+
+						// update image
+						$.ajax({
+							url: reqUrl,
+							type: "GET",
+							dataType: 'jsonp',
+							success: function(imageData){
+								$('.list-group-item').css('background-color', 'white');
+								$('#' + pokemon.resource_uri).css('background-color', 'steelblue');
+								console.log(pokemon.resource_uri);
+								$('.profile-image').attr('src', POKEMON_BASE + imageData.image);
+							}
+						});
 						$.ajax({
 							url: POKEMON_BASE + pokemon.resource_uri,
 							success: displayPokemon,
@@ -77,13 +67,34 @@ $(document).ready(function(){
 		}
 	});
 
+	var getIdFromURI = function(resource_uri){
+		// get id from resource_uri
+		var pokeId = resource_uri.match(/\d/g);
+		pokeId.shift();
+		return pokeId.join('');
+	};
+
+	// side nav click listener
 	$('.side-list').on('click', '.list-group-item', function(){
 		var _this = $(this);
 		_this.siblings().css('background-color', 'white');
 		_this.css('background-color', 'steelblue');
-		var resource_uri = _this.attr('id');
+
+		var reqUrl = POKEMON_BASE + "api/v1/sprite/" + getIdFromURI(_this.attr('id'));
+
+		// update image
 		$.ajax({
-			url: POKEMON_BASE + resource_uri,
+			url: reqUrl,
+			type: "GET",
+			dataType: 'jsonp',
+			success: function(imageData){
+				$('.profile-image').attr('src', POKEMON_BASE + imageData.image);
+			}
+		});
+
+		// get info
+		$.ajax({
+			url: POKEMON_BASE + _this.attr('id'),
 			success: displayPokemon,
 			error: function(err){
 				alert('Whoops! ' + err)
