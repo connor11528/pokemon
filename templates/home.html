@@ -1,1 +1,16 @@
-home partial
+<div class='row text-center'>
+	<div class='col-md-offset-4 col-md-4'>
+		<h1>Search for a Pokemon</h1>
+
+		<input type='text' class='form-control' ng-model='searchTerm' placeholder='Gotta find em all'>
+	</div>
+</div>
+
+<div class='row'>
+
+	<div ng-repeat='pokemon in home.pokedex | filter: { name: searchTerm }' class='col-md-3'>
+
+		<pokemon name='pokemon.name' pokemon-id="home.getIdFromURI(pokemon.resource_uri)"></pokemon>
+		
+	</div>
+</div>

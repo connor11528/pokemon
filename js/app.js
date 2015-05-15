@@ -8,14 +8,17 @@ app.config(function($stateProvider, $urlRouterProvider){
     		controller: 'HomeCtrl',
     		controllerAs: 'home',
     		templateUrl: "templates/home.html"
+    	})
+    	.state("pokemon", {
+    		url: '/pokemon/:id',
+    		templateUrl: "templates/pokemon.html",
+    		controller: 'PokemonCtrl',
+    		controllerAs: 'pokemon'
     	});
 
 	$urlRouterProvider.when('', '/');
 	$urlRouterProvider.otherwise('/404');
 });
-
-
-
 
 
 // var POKEMON_BASE = "http://pokeapi.co/";
