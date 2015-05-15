@@ -32,15 +32,6 @@ app.config(function($stateProvider, $urlRouterProvider){
 // 	return randomPokemonIds;
 // };
 
-// // display pokemon's profile data
-// var displayPokemon = function(profileData){
-// 	$('dl').empty();
-// 	var profileInfo = '';
-// 	for(var key in profileData){
-// 		profileInfo += '<dt>' + key + '</dt>' + '<dd>' + JSON.stringify(profileData[key]) + '</dd>'
-// 	}
-// 	$('dl').append(profileInfo);
-// };
 
 // // get all pokemon
 // var $search = $('.search');
@@ -62,17 +53,6 @@ app.config(function($stateProvider, $urlRouterProvider){
 // 				if (pokemon.name === searchTerm){
 // 					var reqUrl = POKEMON_BASE + "api/v1/sprite/" + getIdFromURI(pokemon.resource_uri);
 
-// 					// update image
-// 					$.ajax({
-// 						url: reqUrl,
-// 						type: "GET",
-// 						dataType: 'jsonp',
-// 						success: function(imageData){
-// 							$('.list-group-item').css('background-color', 'white');
-// 							$('#' + pokemon.resource_uri).css('background-color', 'steelblue');
-// 							$('.profile-image').attr('src', POKEMON_BASE + imageData.image);
-// 						}
-// 					});
 // 					$.ajax({
 // 						url: POKEMON_BASE + pokemon.resource_uri,
 // 						success: displayPokemon,

@@ -8,4 +8,11 @@ app.service('Pokemon', function($http){
 				return res.data;
 			});
 	};
+
+	this.getImageURL = function(id){
+		return $http.get('http://pokeapi.co/api/v1/sprite/' + id)
+			.then(function(res){
+				return 'http://pokeapi.co' + res.data.image;
+			});
+	};
 });

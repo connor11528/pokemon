@@ -5,6 +5,8 @@
 	<div class='col-md-offset-3 col-md-6'>
 		<h1>{{pokemon.pokemon.name}}</h1>
 
+		<img ng-src='{{pokemon.imageURL}}'>
+
 		<p>HP: <span progress-bar number="pokemon.pokemon.hp"></span></p>
 		<p>Attack: <span progress-bar number="pokemon.pokemon.attack"></span></p>
 		<p>Defense: <span progress-bar number="pokemon.pokemon.defense"></span></p>

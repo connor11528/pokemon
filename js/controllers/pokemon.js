@@ -5,4 +5,8 @@ app.controller('PokemonCtrl', function($stateParams, Pokemon){
 	Pokemon.get(poke_id).then(function(data){
 		self.pokemon = data;
 	});
+
+	Pokemon.getImageURL(poke_id).then(function(data){
+		self.imageURL = data;
+	});
 })
