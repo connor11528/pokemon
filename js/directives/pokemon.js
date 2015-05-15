@@ -6,6 +6,6 @@ app.directive('pokemon', function(){
 			name: '=',
 			pokemonId: '='
 		},
-		template: "<h3><a href='/#/pokemon/{{pokemonId}}'>{{name}}</a></h3>"
+		template: "<span class='sprite-xyicons-{{name}}'></span><h3><a href='/#/pokemon/{{pokemonId}}'>{{name}}</a></h3>"
 	}
-})
+});

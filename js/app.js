@@ -1,5 +1,5 @@
 
-var app = angular.module('pokemon', ['ui.router']);
+var app = angular.module('pokemon', ['ui.router', 'ui.bootstrap']);
 
 app.config(function($stateProvider, $urlRouterProvider){
     $stateProvider

@@ -6,6 +6,12 @@
 	</div>
 </div>
 
+<div class='row' ng-controller='PaginationCtrl as page'>
+	<pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages"></pagination>
+    <pre>Page: {{bigCurrentPage}} / {{numPages}}</pre>
+
+</div>
+
 <div class='row'>
 
 	<div ng-repeat='pokemon in home.pokedex | filter: { name: searchTerm }' class='col-md-3'>

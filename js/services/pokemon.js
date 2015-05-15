@@ -11,11 +11,27 @@ app.service('Pokemon', function($http){
 
 	this.getImageURL = function(id){
 		var id = parseInt(id) + 1;
-		console.log(id)
 		return $http.get('http://pokeapi.co/api/v1/sprite/' + id)
 			.then(function(res){
-				console.log(res)
 				return 'http://pokeapi.co' + res.data.image;
 			});
 	};
 });
+
+
+// caching
+// http://jsbin.com/lefegipuvo/2/edit
+
+// .factory('poke', function ($http, $q) {
+//   var cachedPoke = {};
+//   return function (num) {
+//     if (cachedPoke[num]) {
+//       return $q.when(cachedPoke[num]);
+//     }
+//     return $http.get('http://pokeapi.co/api/v1/pokemon/' + num)
+//     .then(function (httpInfo) {
+//       cachedPoke[num] = httpInfo.data;
+//       return httpInfo.data;
+//     });
+//   };
+// });
