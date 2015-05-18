@@ -1,40 +1,27 @@
 
-app.controller('HomeCtrl', function(Pokemon){
-	var self = this;
-	self.searchTerm = '';
-	self.testing = 'this is a test';
+app.controller('HomeCtrl', function($scope, Pokemon){
+	$scope.searchTerm = '';
 
-	self.getIdFromURI = function(resource_uri){
+	Pokemon.getPokedex().then(function(res){
+		$scope.pokedex = res.data.pokemon;
+	});
+
+	$scope.getIdFromURI = function(resource_uri){
 		// get id from resource_uri
 		var pokeId = resource_uri.match(/\d/g);
 		pokeId.shift();
 		return pokeId.join('');
 	};
 
-	Pokemon.getPokedex.then(function(res){
-		self.pokedex = res.data.pokemon;
-	});
-});
+	// pagination
+	$scope.currentPage = 0;
+    $scope.pageSize = 10;
 
-app.controller('PaginationCtrl', function($scope){
-	var self = this;
+    $scope.numberOfPages = function(){
+    	if(typeof($scope.pokedex) === 'undefined') return 0;
 
-	$scope.totalItems = 64;
-	$scope.currentPage = 4;
-
-	$scope.setPage = function (pageNo) {
-		$scope.currentPage = pageNo;
-	};
-
-	$scope.pageChanged = function() {
-		$log.log('Page changed to: ' + $scope.currentPage);
-	};
-
-	$scope.maxSize = 5;
-	$scope.bigTotalItems = 175;
-	$scope.bigCurrentPage = 1;
+        return Math.ceil($scope.pokedex.length/$scope.pageSize);
+    };
 
 });
-
-
 

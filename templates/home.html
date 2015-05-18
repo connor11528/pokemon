@@ -6,17 +6,23 @@
 	</div>
 </div>
 
-<div class='row' ng-controller='PaginationCtrl as page'>
-	<pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages"></pagination>
-    <pre>Page: {{bigCurrentPage}} / {{numPages}}</pre>
-
-</div>
-
 <div class='row'>
 
-	<div ng-repeat='pokemon in home.pokedex | filter: { name: searchTerm }' class='col-md-3'>
+	<div ng-repeat='pokemon in pokedex | orderBy: "name"
+| filter:searchTerm | startFrom:currentPage*pageSize | limitTo:pageSize' class='col-sm-3' style='height:100px;'>
 
-		<pokemon name='pokemon.name' pokemon-id="home.getIdFromURI(pokemon.resource_uri)"></pokemon>
-		
+		<pokemon name='pokemon.name' pokemon-id="getIdFromURI(pokemon.resource_uri)"></pokemon>
 	</div>
+
 </div>
+
+<!-- page buttons -->
+<button class='btn btn-primary' ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
+    Previous
+</button>
+
+{{currentPage+1}}/{{numberOfPages()}}
+
+<button class='btn btn-primary' ng-disabled="currentPage >= pokedex.length/pageSize - 1" ng-click="currentPage=currentPage+1">
+    Next
+</button>
